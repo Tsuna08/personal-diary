@@ -1,0 +1,14 @@
+.card_button {
+  border-radius: 0.1875rem;
+  background-color: #343232;
+  color: #fff;
+  padding: 1.25rem;
+  border: none;
+  cursor: pointer;
+  text-align: start;
+  display: block;
+
+  &:hover {
+    background-color: #404040;
+  }
+}
