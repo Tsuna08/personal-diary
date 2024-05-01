@@ -1,3 +1,4 @@
+import Button from '../../../components/Button';
 import CardButton from '../../../components/CardButton/ui/CardButton';
 import DiaryItem from '../../../components/DiaryItem/ui/DiaryItem';
 
@@ -19,8 +20,10 @@ const Main = () => {
     <>
       <h1>Заголовок</h1>
       <p>Текст</p>
-      {data.map((item) => (
-        <CardButton>
+      <Button text='Сохранить' onClick={() => {}} />
+      <CardButton>Новое воспоминание</CardButton>
+      {data.map((item, index) => (
+        <CardButton key={index}>
           <DiaryItem title={item.title} date={item.date} text={item.text} />
         </CardButton>
       ))}

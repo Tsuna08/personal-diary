@@ -7,7 +7,7 @@ interface CardButtonProps {
 }
 
 const CardButton = ({ children }: CardButtonProps) => {
-  return <div className={classes.card_button}>{children}</div>;
+  return <button className={classes.card_button}>{children}</button>;
 };
 
 export default CardButton;

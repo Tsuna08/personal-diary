@@ -11,7 +11,7 @@ const DiaryItem = ({ title, date, text }: DiaryItemProps) => {
   return (
     <>
       <h2 className={classes.header}>{title}</h2>
-      <h2 className={classes.body}>
+      <h2 className={classes.content}>
         <div className={classes.date}>{formatDate}</div>
         <div className={classes.text}>{text}</div>
       </h2>

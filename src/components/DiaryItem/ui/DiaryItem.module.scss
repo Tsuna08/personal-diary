@@ -5,6 +5,11 @@
   list-style: 1.75rem;
 }
 
+.content {
+  display: flex;
+  gap: 0.3125rem;
+}
+
 .date {
   color: rgba(255, 255, 255, 0.4);
   font-size: 1rem;
