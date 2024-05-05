@@ -1,13 +1,9 @@
 import './App.css';
 
-import Main from './pages/Main';
+import BaseLayout from './layout/BaseLayout';
 
 function App() {
-  return (
-    <>
-      <Main />
-    </>
-  );
+  return <BaseLayout />;
 }
 
 export default App;
