@@ -1,9 +1,7 @@
-// import classes from './Header.module.scss';
-
-// interface HeaderProps {}
+import classes from './Header.module.scss';
 
 const Header = () => {
-  return <>Logo</>;
+  return <img className={classes.logo} src='/logo.svg' alt='Logo' />;
 };
 
 export default Header;

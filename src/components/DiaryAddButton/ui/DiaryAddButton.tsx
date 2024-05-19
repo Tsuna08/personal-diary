@@ -1,11 +1,16 @@
 import CardButton from '../../../components/CardButton';
 import classes from './DiaryAddButton.module.scss';
 
-// interface DiaryAddButtonProps {}
+interface DiaryAddButtonProps {
+  onClick?: () => void;
+}
 
-const DiaryAddButton = () => {
+const DiaryAddButton = ({ onClick }: DiaryAddButtonProps) => {
   return (
-    <CardButton className={classes.add_button}>Новое воспоминание</CardButton>
+    <CardButton className={classes.add_button} onClick={onClick}>
+      <img className={classes.icon} src='/plus.svg' alt='Plus' />
+      Новое воспоминание
+    </CardButton>
   );
 };
 

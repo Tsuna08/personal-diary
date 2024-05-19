@@ -1,3 +1,9 @@
 .add_button {
-  text-align: centers;
+  display: flex;
+  align-items: centers;
+  gap: 0.5rem;
+}
+
+.icon {
+  width: 1rem;
 }
