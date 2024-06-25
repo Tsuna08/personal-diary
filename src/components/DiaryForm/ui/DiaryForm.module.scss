@@ -3,3 +3,39 @@
   flex-direction: column;
   gap: 1rem;
 }
+
+.field {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.input {
+  border: none;
+  border-bottom: 1px solid #8a8a8a;
+  background: none;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 100%;
+}
+
+.label {
+  display: flex;
+  align-self: center;
+  gap: 1rem;
+  min-width: 5rem;
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.inputTitle {
+  font-size: 1.5rem;
+}
+
+.inputSmall {
+  font-size: 0.875rem;
+}

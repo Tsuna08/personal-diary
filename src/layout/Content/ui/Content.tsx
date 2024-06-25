@@ -5,7 +5,7 @@ interface ContentProps {
 }
 
 const Content = ({ children }: ContentProps) => {
-  return <div>{children}</div>;
+  return <div style={{ flexGrow: 1 }}>{children}</div>;
 };
 
 export default Content;
