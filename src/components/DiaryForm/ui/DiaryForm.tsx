@@ -1,6 +1,7 @@
-import { ChangeEvent, useEffect, useReducer } from 'react';
+import classNames from 'classnames';
+import { ChangeEvent, FormEvent, useEffect, useReducer, useRef } from 'react';
 
-import Button from '@/components/Button';
+import { Button } from '@/components';
 import { Note } from '@/types/types';
 
 import { formReducer, INITIAL_STATE } from '../lib/utils';
@@ -13,11 +14,17 @@ interface DiaryFormProps {
 const DiaryForm = ({ onSubmit }: DiaryFormProps) => {
   const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
   const { isValid, isFormReadyToSubmit, values } = formState;
+  const titleRef = useRef<HTMLInputElement>(null);
+  const dateRef = useRef<HTMLInputElement>(null);
+  const postRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     let timeId: any;
-    if (!isValid.title || !isValid.date || !isValid.post)
+
+    if (!isValid.title || !isValid.date || !isValid.post) {
+      focusError(isValid);
       timeId = setTimeout(() => dispatchForm({ type: 'RESET_VALIDITY' }), 2000);
+    }
 
     return () => clearTimeout(timeId);
   }, [isValid]);
@@ -29,7 +36,22 @@ const DiaryForm = ({ onSubmit }: DiaryFormProps) => {
     }
   }, [isFormReadyToSubmit]);
 
-  const addDiaryItem = () => {
+  const focusError = (isValid: any) => {
+    switch (true) {
+      case !isValid.title:
+        titleRef?.current?.focus();
+        break;
+      case !isValid.date:
+        dateRef?.current?.focus();
+        break;
+      case !isValid.post:
+        postRef?.current?.focus();
+        break;
+    }
+  };
+
+  const addDiaryItem = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     dispatchForm({ type: 'SUBMIT' });
   };
 
@@ -43,16 +65,17 @@ const DiaryForm = ({ onSubmit }: DiaryFormProps) => {
     });
   };
 
-  const errorStyle = { border: '1px solid red' };
   return (
     <form className={classes.form} onSubmit={addDiaryItem}>
       <div className={classes.field}>
         <input
+          ref={titleRef}
           type='text'
           name='title'
           value={values.title}
-          className={`${classes.input} ${classes.inputTitle}`}
-          style={!isValid.title ? errorStyle : {}}
+          className={classNames(classes.input, classes.inputTitle, {
+            [classes.error]: !isValid.title
+          })}
           onChange={handleChange}
         />
       </div>
@@ -62,12 +85,14 @@ const DiaryForm = ({ onSubmit }: DiaryFormProps) => {
           <span>Дата</span>
         </label>
         <input
+          ref={dateRef}
           id='date'
           type='date'
           name='date'
           value={values.date}
-          className={`${classes.input} ${classes.inputSmall}`}
-          style={!isValid.date ? errorStyle : {}}
+          className={classNames(classes.input, classes.inputTitle, {
+            [classes.error]: !isValid.date
+          })}
           onChange={handleChange}
         />
       </div>
@@ -81,17 +106,19 @@ const DiaryForm = ({ onSubmit }: DiaryFormProps) => {
           type='text'
           name='tag'
           value={values.tag}
-          className={`${classes.input} ${classes.inputSmall}`}
+          className={classNames(classes.input, classes.inputTitle)}
           onChange={handleChange}
         />
       </div>
       <div className={classes.field}>
         <textarea
+          ref={postRef}
           name='post'
           rows={10}
           value={values.post}
-          className={`${classes.input} `}
-          style={!isValid.post ? errorStyle : {}}
+          className={classNames(classes.input, {
+            [classes.error]: !isValid.post
+          })}
           onChange={handleChange}
         />
       </div>
