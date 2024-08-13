@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import DiaryAddButton from '@/components/DiaryAddButton';
+import { AddButton } from '@/components';
 import DiaryForm from '@/components/DiaryForm';
 import DiaryList from '@/components/DiaryList';
 import Header from '@/components/Header';
@@ -39,7 +39,10 @@ const BaseLayout = () => {
       <Header />
       <div className={classes.layout}>
         <LeftPanel>
-          <DiaryAddButton onClick={() => setShowForm(true)} />
+          <AddButton
+            title='Новое воспоминание'
+            onClick={() => setShowForm(true)}
+          />
           <DiaryList notes={mapNotes(data)} />
         </LeftPanel>
         <Content>{showForm && <DiaryForm onSubmit={addNote} />}</Content>

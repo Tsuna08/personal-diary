@@ -1,4 +1,4 @@
-import CardButton from '@/components/CardButton';
+import { CardButton } from '@/components';
 import DiaryItem from '@/components/DiaryItem';
 import { Note } from '@/types/types';
 
