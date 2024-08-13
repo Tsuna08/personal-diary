@@ -1,7 +1,5 @@
 import classes from './Header.module.scss';
 
-const Header = () => {
-  return <img className={classes.logo} src='/logo.svg' alt='Logo' />;
-};
-
-export default Header;
+export const Header = () => (
+  <img className={classes.logo} src='/logo.svg' alt='Logo' />
+);

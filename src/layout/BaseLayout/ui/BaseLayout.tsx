@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
-import { AddButton } from '@/components';
-import DiaryForm from '@/components/DiaryForm';
-import DiaryList from '@/components/DiaryList';
-import Header from '@/components/Header';
+import { AddButton, Form, Header, List } from '@/components';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { Note } from '@/types/types';
 
@@ -43,9 +40,9 @@ const BaseLayout = () => {
             title='Новое воспоминание'
             onClick={() => setShowForm(true)}
           />
-          <DiaryList notes={mapNotes(data)} />
+          <List notes={mapNotes(data)} />
         </LeftPanel>
-        <Content>{showForm && <DiaryForm onSubmit={addNote} />}</Content>
+        <Content>{showForm && <Form onSubmit={addNote} />}</Content>
       </div>
     </>
   );

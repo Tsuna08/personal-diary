@@ -1,12 +1,12 @@
-import classes from './DiaryItem.module.scss';
+import classes from './ListItem.module.scss';
 
-interface DiaryItemProps {
+interface ListItemProps {
   title: string;
   date: Date;
   text: string;
 }
 
-const DiaryItem = ({ title, date, text }: DiaryItemProps) => {
+export const ListItem = ({ title, date, text }: ListItemProps) => {
   const formatDate = new Intl.DateTimeFormat('ru-RU').format(date);
   return (
     <>
@@ -18,5 +18,3 @@ const DiaryItem = ({ title, date, text }: DiaryItemProps) => {
     </>
   );
 };
-
-export default DiaryItem;

@@ -1,12 +1,11 @@
-import { CardButton } from '@/components';
-import DiaryItem from '@/components/DiaryItem';
+import { CardButton, ListItem } from '@/components';
 import { Note } from '@/types/types';
 
-interface DiaryListProps {
+interface ListProps {
   notes: Note[];
 }
 
-const DiaryList = ({ notes }: DiaryListProps) => {
+export const List = ({ notes }: ListProps) => {
   if (notes.length === 0) {
     return <p>Записей нет, добавьте новую</p>;
   }
@@ -17,11 +16,9 @@ const DiaryList = ({ notes }: DiaryListProps) => {
     <>
       {notes?.sort(sortNote).map((item) => (
         <CardButton key={item.id}>
-          <DiaryItem title={item.title} date={item.date} text={item.text} />
+          <ListItem title={item.title} date={item.date} text={item.text} />
         </CardButton>
       ))}
     </>
   );
 };
-
-export default DiaryList;

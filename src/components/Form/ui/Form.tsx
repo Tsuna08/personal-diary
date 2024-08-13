@@ -5,13 +5,13 @@ import { Button } from '@/components';
 import { Note } from '@/types/types';
 
 import { formReducer, INITIAL_STATE } from '../lib/utils';
-import classes from './DiaryForm.module.scss';
+import classes from './Form.module.scss';
 
-interface DiaryFormProps {
+interface FormProps {
   onSubmit: (note: Note) => void;
 }
 
-const DiaryForm = ({ onSubmit }: DiaryFormProps) => {
+export const Form = ({ onSubmit }: FormProps) => {
   const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
   const { isValid, isFormReadyToSubmit, values } = formState;
   const titleRef = useRef<HTMLInputElement>(null);
@@ -127,5 +127,3 @@ const DiaryForm = ({ onSubmit }: DiaryFormProps) => {
     </form>
   );
 };
-
-export default DiaryForm;
