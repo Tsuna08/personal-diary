@@ -4,3 +4,8 @@ export interface Note {
   date: Date;
   text: string;
 }
+
+export enum Themes {
+  dark = 'dark',
+  light = 'light'
+}

@@ -1,2 +1,1 @@
-import LeftPanel from './ui/LeftPanel';
-export default LeftPanel;
+export { LeftPanel } from './ui/LeftPanel';

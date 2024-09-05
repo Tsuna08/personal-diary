@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import { AddButton, Form, Header, List } from '@/components';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { Note } from '@/types/types';
+import { Content } from '@/layout/Content';
+import { LeftPanel } from '@/layout/LeftPanel';
+import { Note } from '@/types/root';
 
-import Content from '../../Content';
-import LeftPanel from '../../LeftPanel';
 import classes from './BaseLayout.module.scss';
 
 const BaseLayout = () => {

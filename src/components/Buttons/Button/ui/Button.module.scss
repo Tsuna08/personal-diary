@@ -4,16 +4,16 @@
   font-size: 0.8rem;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
-  color: white;
+  background-color: var(--button-background);
+  color: var(--button-color);
   cursor: pointer;
   border: none;
 }
 
 .accent {
-  background-color: #312eb5;
+  background-color: var(--button-submit-background);
 
   &:hover {
-    background-color: #646cff;
+    background-color: var(--button-submit-background-hover);
   }
 }

@@ -1,7 +1,7 @@
 .card_button {
   border-radius: 0.1875rem;
-  background-color: #343232;
-  color: #fff;
+  background-color: var(--button-card-background);
+  color: var(--button-card-color);
   padding: 1.25rem;
   border: none;
   cursor: pointer;
@@ -10,6 +10,6 @@
   width: 100%;
 
   &:hover {
-    background-color: #404040;
+    background-color: var(--button-card-background-hover);
   }
 }

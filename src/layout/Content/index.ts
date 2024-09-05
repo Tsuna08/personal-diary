@@ -1,2 +1,1 @@
-import Content from './ui/Content';
-export default Content;
+export { Content } from './ui/Content';

@@ -4,8 +4,6 @@ interface ContentProps {
   children: ReactNode;
 }
 
-const Content = ({ children }: ContentProps) => {
-  return <div style={{ flexGrow: 1 }}>{children}</div>;
-};
-
-export default Content;
+export const Content = ({ children }: ContentProps) => (
+  <div style={{ flexGrow: 1 }}>{children}</div>
+);

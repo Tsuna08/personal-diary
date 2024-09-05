@@ -1,0 +1,90 @@
+$width_slider: 70px;
+$height_slider: 25px;
+$width_pointer: 15px;
+$height_pointer: 15px;
+
+.root {
+  width: $width_slider;
+  height: $height_slider;
+  transform: translate(35%, -10%);
+  input {
+    display: none;
+  }
+
+  .slider,
+  .wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 1.4s;
+  }
+
+  .slider {
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    overflow: hidden;
+    background-color: #e74a42;
+    border-radius: 50px;
+    cursor: pointer;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      left: 5px;
+      width: $width_pointer;
+      height: $height_pointer;
+      background-color: #ffffff;
+      border-radius: 50px;
+    }
+    &:before {
+      transition: 0.4s;
+    }
+    &:after {
+      transition: 0.5s;
+    }
+  }
+
+  .wave {
+    width: $width_slider;
+    height: $height_slider;
+    border-radius: 40px;
+
+    &:after,
+    &:before {
+      content: '';
+      position: absolute;
+      background: #ffffff;
+      border-radius: 100%;
+    }
+    &:after {
+      top: 3px;
+      left: 15%;
+      width: 50px;
+      height: 3px;
+      opacity: 0.4;
+    }
+    &:before {
+      top: 10px;
+      left: 30%;
+      width: 35px;
+      height: 2px;
+      opacity: 0.3;
+    }
+  }
+
+  input:checked + .slider {
+    background-color: transparent;
+    &:before,
+    &:after {
+      transform: translateX(45px);
+    }
+  }
+
+  input:checked ~ .wave {
+    display: block;
+    background-color: #3398d9;
+  }
+}

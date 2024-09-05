@@ -6,8 +6,6 @@ interface LeftPanelProps {
   children: ReactNode;
 }
 
-const LeftPanel = ({ children }: LeftPanelProps) => {
+export const LeftPanel = ({ children }: LeftPanelProps) => {
   return <div className={classes.panel}>{children}</div>;
 };
-
-export default LeftPanel;
