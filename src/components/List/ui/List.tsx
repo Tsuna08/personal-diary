@@ -1,5 +1,5 @@
 import { CardButton, ListItem } from '@/components';
-import { Note } from '@/types/types';
+import { Note } from '@/types/root';
 
 interface ListProps {
   notes: Note[];

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { ChangeEvent, FormEvent, useEffect, useReducer, useRef } from 'react';
 
 import { Button } from '@/components';
-import { Note } from '@/types/types';
+import { Note } from '@/types/root';
 
 import { formReducer, INITIAL_STATE } from '../lib/utils';
 import classes from './Form.module.scss';
