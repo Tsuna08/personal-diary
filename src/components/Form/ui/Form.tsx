@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, useEffect, useReducer, useRef } from 'react';
 
 import { Button } from '@/components';
 import { Note } from '@/types/root';
+import { FormValid, TypesActionForm } from '@/types/root';
 
 import { formReducer, INITIAL_STATE } from '../lib/utils';
 import classes from './Form.module.scss';
@@ -19,11 +20,11 @@ export const Form = ({ onSubmit }: FormProps) => {
   const postRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    let timeId: any;
+    let timeId: NodeJS.Timeout;
 
     if (!isValid.title || !isValid.date || !isValid.post) {
       focusError(isValid);
-      timeId = setTimeout(() => dispatchForm({ type: 'RESET_VALIDITY' }), 2000);
+      timeId = setTimeout(() => dispatchForm({ type: TypesActionForm.RESET_VALIDITY }), 2000);
     }
 
     return () => clearTimeout(timeId);
@@ -32,11 +33,11 @@ export const Form = ({ onSubmit }: FormProps) => {
   useEffect(() => {
     if (isFormReadyToSubmit) {
       onSubmit(values);
-      dispatchForm({ type: 'CLEAR' });
+      dispatchForm({ type: TypesActionForm.CLEAR });
     }
   }, [isFormReadyToSubmit]);
 
-  const focusError = (isValid: any) => {
+  const focusError = (isValid: FormValid) => {
     switch (true) {
       case !isValid.title:
         titleRef?.current?.focus();
@@ -52,15 +53,13 @@ export const Form = ({ onSubmit }: FormProps) => {
 
   const addDiaryItem = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatchForm({ type: 'SUBMIT' });
+    dispatchForm({ type: TypesActionForm.SUBMIT });
   };
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const target = e.target as HTMLInputElement;
     dispatchForm({
-      type: 'SET_VALUE',
+      type: TypesActionForm.SET_VALUE,
       payload: { [target.name]: target.value }
     });
   };
