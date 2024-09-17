@@ -11,6 +11,7 @@ import classes from './BaseLayout.module.scss';
 const BaseLayout = () => {
   const [data, setData] = useLocalStorage('data');
   const [showForm, setShowForm] = useState(false);
+  const [selectNote, setSelectNote] = useState({});
 
   const mapNotes = (notes: Note[]) => {
     if (!notes) return [];
@@ -21,29 +22,28 @@ const BaseLayout = () => {
     setData([
       ...mapNotes(data),
       {
-        id:
-          data.length > 0
-            ? Math.max(...data.map((item: Note) => item.id)) + 1
-            : 1,
-        text: note.text,
+        id: data.length > 0 ? Math.max(...data.map((item: Note) => item.id)) + 1 : 1,
         title: note.title,
-        date: new Date(note.date)
+        date: new Date(note.date),
+        tag: note.tag,
+        post: note.post
       }
     ]);
+  const handleSelected = (note: Note) => {
+    setSelectNote(note);
+    setShowForm(true);
+  };
 
   return (
     <>
       <Header />
-      <div className={classes.layout}>
+      <main className={classes.layout}>
         <LeftPanel>
-          <AddButton
-            title='Новое воспоминание'
-            onClick={() => setShowForm(true)}
-          />
-          <List notes={mapNotes(data)} />
+          <AddButton title='Новое воспоминание' onClick={() => setShowForm(true)} />
+          <List notes={mapNotes(data)} changeSelected={handleSelected} />
         </LeftPanel>
-        <Content>{showForm && <Form onSubmit={addNote} />}</Content>
-      </div>
+        <Content>{showForm && <Form onSubmit={addNote} data={selectNote} />}</Content>
+      </main>
     </>
   );
 };

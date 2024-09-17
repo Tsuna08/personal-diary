@@ -10,7 +10,7 @@ export const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   return (
-    <div className={classes.header}>
+    <header className={classes.header}>
       <div className={classes.logo} />
       <Toggle
         onChange={() => {
@@ -19,6 +19,6 @@ export const Header = () => {
         }}
         value={theme === Themes.dark}
       />
-    </div>
+    </header>
   );
 };

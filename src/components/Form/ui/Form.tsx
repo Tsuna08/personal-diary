@@ -9,15 +9,20 @@ import { formReducer, INITIAL_STATE } from '../lib/utils';
 import classes from './Form.module.scss';
 
 interface FormProps {
+  data: any;
   onSubmit: (note: Note) => void;
 }
 
-export const Form = ({ onSubmit }: FormProps) => {
+export const Form = ({ data, onSubmit }: FormProps) => {
   const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
   const { isValid, isFormReadyToSubmit, values } = formState;
   const titleRef = useRef<HTMLInputElement>(null);
   const dateRef = useRef<HTMLInputElement>(null);
   const postRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    dispatchForm({ type: TypesActionForm.SET_VALUE, payload: { ...data } });
+  }, [data]);
 
   useEffect(() => {
     let timeId: NodeJS.Timeout;
@@ -66,7 +71,7 @@ export const Form = ({ onSubmit }: FormProps) => {
 
   return (
     <form className={classes.form} onSubmit={addDiaryItem}>
-      <div className={classes.field}>
+      <section className={classes.field}>
         <input
           ref={titleRef}
           type='text'
@@ -77,8 +82,8 @@ export const Form = ({ onSubmit }: FormProps) => {
           })}
           onChange={handleChange}
         />
-      </div>
-      <div className={classes.field}>
+      </section>
+      <section className={classes.field}>
         <label htmlFor='date' className={classes.label}>
           <img src='/calendar.svg' alt='Calendar' className={classes.icon} />
           <span>Дата</span>
@@ -94,8 +99,8 @@ export const Form = ({ onSubmit }: FormProps) => {
           })}
           onChange={handleChange}
         />
-      </div>
-      <div className={classes.field}>
+      </section>
+      <section className={classes.field}>
         <label htmlFor='tag' className={classes.label}>
           <img src='/folder.svg' alt='Folder' className={classes.icon} />
           <span>Метки</span>
@@ -108,8 +113,8 @@ export const Form = ({ onSubmit }: FormProps) => {
           className={classNames(classes.input, classes.inputTitle)}
           onChange={handleChange}
         />
-      </div>
-      <div className={classes.field}>
+      </section>
+      <section className={classes.field}>
         <textarea
           ref={postRef}
           name='post'
@@ -120,7 +125,7 @@ export const Form = ({ onSubmit }: FormProps) => {
           })}
           onChange={handleChange}
         />
-      </div>
+      </section>
 
       <Button text='Сохранить' />
     </form>

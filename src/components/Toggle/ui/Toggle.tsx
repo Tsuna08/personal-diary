@@ -5,11 +5,11 @@ interface ToggleProps {
 }
 
 export const Toggle = ({ value, onChange }: ToggleProps) => (
-  <div className={classes.root}>
+  <section className={classes.root}>
     <label className={classes.switch} htmlFor='toggler'>
       <input id='toggler' type='checkbox' checked={value} onClick={onChange} readOnly />
       <span className={classes.slider} />
       <span className={classes.wave} />
     </label>
-  </div>
+  </section>
 );

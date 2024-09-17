@@ -2,7 +2,8 @@ export interface Note {
   id: number;
   title: string;
   date: Date;
-  text: string;
+  tag?: string;
+  post?: string;
 }
 
 export enum Themes {

@@ -1,27 +1,25 @@
-.header {
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 600;
-  list-style: 1.75rem;
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+  max-width: 15rem;
 }
 
-.content {
-  display: flex;
-  gap: 0.3125rem;
+.date,
+.post {
+  font-size: 0.95rem;
+  font-style: normal;
+  font-weight: 400;
+  list-style: normal;
 }
 
 .date {
   color: var(--text-color-light);
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  list-style: normal;
 }
 
-.text {
+.post {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--text-color);
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  list-style: normal;
 }
