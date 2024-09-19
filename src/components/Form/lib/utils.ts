@@ -1,7 +1,7 @@
-import { FormValid, TypesActionForm } from '@/types/root';
+import { FormValid, Note, TypesActionForm } from '@/types/root';
 interface FormAction {
   readonly type: TypesActionForm;
-  readonly payload?: { [x: string]: string };
+  readonly payload?: Note | { [x: string]: string };
 }
 
 interface FormState {

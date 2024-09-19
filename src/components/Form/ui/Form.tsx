@@ -8,11 +8,12 @@ import { formReducer, INITIAL_STATE } from '../lib/utils';
 import classes from './Form.module.scss';
 
 interface FormProps {
-  data: any;
+  data?: Note;
+  onDelete: (id: number) => void;
   onSubmit: (note: Note) => void;
 }
 
-export const Form = ({ data, onSubmit }: FormProps) => {
+export const Form = ({ data, onDelete, onSubmit }: FormProps) => {
   const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
   const { isValid, isFormReadyToSubmit, values } = formState;
   const titleRef = useRef<HTMLInputElement>(null);
@@ -20,6 +21,8 @@ export const Form = ({ data, onSubmit }: FormProps) => {
   const postRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
+    if (!data) return dispatchForm({ type: TypesActionForm.CLEAR });
+
     dispatchForm({ type: TypesActionForm.SET_VALUE, payload: { ...data } });
   }, [data]);
 
@@ -81,10 +84,15 @@ export const Form = ({ data, onSubmit }: FormProps) => {
           })}
           onChange={handleChange}
         />
+        {data?.id && (
+          <button type='button' className={classes.button} onClick={() => onDelete(data.id)}>
+            <div className={classes.iconButton} />
+          </button>
+        )}
       </section>
       <section className={classes.field}>
         <label htmlFor='date' className={classes.label}>
-          <img src='/calendar.svg' alt='Calendar' className={classes.icon} />
+          <div className={classNames(classes.icon, classes.iconCalendar)} />
           <span>Дата</span>
         </label>
         <input
@@ -93,15 +101,13 @@ export const Form = ({ data, onSubmit }: FormProps) => {
           type='date'
           name='date'
           value={values.date ? new Date(values.date).toISOString().slice(0, 10) : ''}
-          className={classNames(classes.input, classes.inputTitle, {
-            [classes.error]: !isValid.date
-          })}
+          className={classNames(classes.input, { [classes.error]: !isValid.date })}
           onChange={handleChange}
         />
       </section>
       <section className={classes.field}>
         <label htmlFor='tag' className={classes.label}>
-          <img src='/folder.svg' alt='Folder' className={classes.icon} />
+          <div className={classNames(classes.icon, classes.iconFolder)} />
           <span>Метки</span>
         </label>
         <input
@@ -109,7 +115,7 @@ export const Form = ({ data, onSubmit }: FormProps) => {
           type='text'
           name='tag'
           value={values.tag}
-          className={classNames(classes.input, classes.inputTitle)}
+          className={classes.input}
           onChange={handleChange}
         />
       </section>

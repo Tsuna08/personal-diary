@@ -11,16 +11,11 @@ import classes from './BaseLayout.module.scss';
 const BaseLayout = () => {
   const [data, setData] = useLocalStorage('data');
   const [showForm, setShowForm] = useState(false);
-  const [selectNote, setSelectNote] = useState({});
+  const [selectNote, setSelectNote] = useState<Note | undefined>();
 
   const mapNotes = (notes: Note[]) => {
     if (!notes) return [];
     return notes.map((item) => ({ ...item, date: new Date(item.date) }));
-  };
-
-  const handleSubmit = (note: Note) => {
-    if (!note.id) addNote(note);
-    editNote(note);
   };
 
   const addNote = (note: Note) =>
@@ -35,15 +30,29 @@ const BaseLayout = () => {
 
   const editNote = (note: Note) =>
     setData([
-      ...mapNotes(data).map((item) => {
-        if (item.id === note.id) return { ...note, date: new Date(note.date) };
-        return item;
-      })
+      ...mapNotes(data).map((item) =>
+        item.id === note.id ? { ...note, date: new Date(note.date) } : item
+      )
     ]);
+
+  const handleSubmit = (note: Note) => {
+    if (!note.id) return addNote(note);
+    editNote(note);
+  };
+
+  const handleAdd = () => {
+    setSelectNote(undefined);
+    setShowForm(true);
+  };
 
   const handleSelected = (note: Note) => {
     setSelectNote(note);
     setShowForm(true);
+  };
+
+  const handleDelete = (id: number) => {
+    setData([...mapNotes(data).filter((item) => item.id !== id)]);
+    setShowForm(false);
   };
 
   return (
@@ -51,10 +60,12 @@ const BaseLayout = () => {
       <Header />
       <main className={classes.layout}>
         <LeftPanel>
-          <AddButton title='Новое воспоминание' onClick={() => setShowForm(true)} />
+          <AddButton title='Новое воспоминание' onClick={handleAdd} />
           <List notes={mapNotes(data)} changeSelected={handleSelected} />
         </LeftPanel>
-        <Content>{showForm && <Form onSubmit={handleSubmit} data={selectNote} />}</Content>
+        <Content>
+          {showForm && <Form onDelete={handleDelete} onSubmit={handleSubmit} data={selectNote} />}
+        </Content>
       </main>
     </>
   );
