@@ -18,17 +18,29 @@ const BaseLayout = () => {
     return notes.map((item) => ({ ...item, date: new Date(item.date) }));
   };
 
+  const handleSubmit = (note: Note) => {
+    if (!note.id) addNote(note);
+    editNote(note);
+  };
+
   const addNote = (note: Note) =>
     setData([
       ...mapNotes(data),
       {
+        ...note,
         id: data.length > 0 ? Math.max(...data.map((item: Note) => item.id)) + 1 : 1,
-        title: note.title,
-        date: new Date(note.date),
-        tag: note.tag,
-        post: note.post
+        date: new Date(note.date)
       }
     ]);
+
+  const editNote = (note: Note) =>
+    setData([
+      ...mapNotes(data).map((item) => {
+        if (item.id === note.id) return { ...note, date: new Date(note.date) };
+        return item;
+      })
+    ]);
+
   const handleSelected = (note: Note) => {
     setSelectNote(note);
     setShowForm(true);
@@ -42,7 +54,7 @@ const BaseLayout = () => {
           <AddButton title='Новое воспоминание' onClick={() => setShowForm(true)} />
           <List notes={mapNotes(data)} changeSelected={handleSelected} />
         </LeftPanel>
-        <Content>{showForm && <Form onSubmit={addNote} data={selectNote} />}</Content>
+        <Content>{showForm && <Form onSubmit={handleSubmit} data={selectNote} />}</Content>
       </main>
     </>
   );

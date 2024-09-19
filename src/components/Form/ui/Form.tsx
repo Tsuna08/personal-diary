@@ -2,8 +2,7 @@ import classNames from 'classnames';
 import { ChangeEvent, FormEvent, useEffect, useReducer, useRef } from 'react';
 
 import { Button } from '@/components';
-import { Note } from '@/types/root';
-import { FormValid, TypesActionForm } from '@/types/root';
+import { FormValid, Note, TypesActionForm } from '@/types/root';
 
 import { formReducer, INITIAL_STATE } from '../lib/utils';
 import classes from './Form.module.scss';
@@ -93,7 +92,7 @@ export const Form = ({ data, onSubmit }: FormProps) => {
           id='date'
           type='date'
           name='date'
-          value={values.date}
+          value={values.date ? new Date(values.date).toISOString().slice(0, 10) : ''}
           className={classNames(classes.input, classes.inputTitle, {
             [classes.error]: !isValid.date
           })}
