@@ -11,7 +11,6 @@ export const useLocalStorage = (key: string) => {
   }, []);
 
   const saveData = (updateData: any) => {
-    console.log('updateData: ', updateData);
     localStorage.setItem(key, JSON.stringify(updateData));
     setData(updateData);
   };
