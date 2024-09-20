@@ -10,17 +10,6 @@
   gap: 1rem;
 }
 
-.input {
-  border: none;
-  border-bottom: 1px solid #8a8a8a;
-  background: none;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  width: 100%;
-  font-size: 0.875rem;
-}
-
 .label {
   display: flex;
   align-self: center;
@@ -70,9 +59,4 @@
 
 .inputTitle {
   font-size: 1.375rem;
-}
-
-.error {
-  border: 1px solid #a50000;
-  background: #a5000054;
 }

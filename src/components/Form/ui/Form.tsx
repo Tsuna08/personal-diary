@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ChangeEvent, FormEvent, useEffect, useReducer, useRef } from 'react';
 
-import { Button } from '@/components';
+import { Button, Input, Textarea } from '@/components';
 import { FormValid, Note, TypesActionForm } from '@/types/root';
 
 import { formReducer, INITIAL_STATE } from '../lib/utils';
@@ -74,14 +74,11 @@ export const Form = ({ data, onDelete, onSubmit }: FormProps) => {
   return (
     <form className={classes.form} onSubmit={addDiaryItem}>
       <section className={classes.field}>
-        <input
+        <Input
           ref={titleRef}
-          type='text'
-          name='title'
           value={values.title}
-          className={classNames(classes.input, classes.inputTitle, {
-            [classes.error]: !isValid.title
-          })}
+          className={classes.inputTitle}
+          isError={!isValid.title}
           onChange={handleChange}
         />
         {data?.id && (
@@ -90,44 +87,35 @@ export const Form = ({ data, onDelete, onSubmit }: FormProps) => {
           </button>
         )}
       </section>
+
       <section className={classes.field}>
         <label htmlFor='date' className={classes.label}>
           <div className={classNames(classes.icon, classes.iconCalendar)} />
           <span>Дата</span>
         </label>
-        <input
+        <Input
           ref={dateRef}
           id='date'
           type='date'
-          name='date'
           value={values.date ? new Date(values.date).toISOString().slice(0, 10) : ''}
-          className={classNames(classes.input, { [classes.error]: !isValid.date })}
+          isError={!isValid.date}
           onChange={handleChange}
         />
       </section>
+
       <section className={classes.field}>
         <label htmlFor='tag' className={classes.label}>
           <div className={classNames(classes.icon, classes.iconFolder)} />
           <span>Метки</span>
         </label>
-        <input
-          id='tag'
-          type='text'
-          name='tag'
-          value={values.tag}
-          className={classes.input}
-          onChange={handleChange}
-        />
+        <Input id='tag' value={values.tag} className={classes.input} onChange={handleChange} />
       </section>
+
       <section className={classes.field}>
-        <textarea
+        <Textarea
           ref={postRef}
-          name='post'
-          rows={10}
           value={values.post}
-          className={classNames(classes.input, {
-            [classes.error]: !isValid.post
-          })}
+          isError={!isValid.post}
           onChange={handleChange}
         />
       </section>

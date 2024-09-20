@@ -1,8 +1,9 @@
+import { ButtonHTMLAttributes } from 'react';
+
 import classes from './Button.module.scss';
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  onClick?: () => void;
 }
 
 export const Button = ({ text, onClick }: ButtonProps) => (
